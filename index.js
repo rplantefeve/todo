@@ -1,9 +1,14 @@
 var express = require('express');
+// pour gérer les chemins d'accès
+var path = require('path');
 // pour gérer la session
 var session = require('express-session');
 
 // instanciation de l'application
 var app = express();
+
+// emplacement des fichiers statiques (images, ...)
+var dir = path.join(__dirname, 'public');
 
 // date d'expiration du cookie de session : 1 heure
 var expiryDate = new Date(Date.now() + 60 * 60 * 1000);
@@ -11,8 +16,9 @@ var expiryDate = new Date(Date.now() + 60 * 60 * 1000);
 // tableau de test de choses à faire
 var thingsToDo = ['Couper du bois', 'Faire la vaisselle', 'Nourrir le cheval'];
 
-// Accepter les connexions sécurisées du localhost
-app.use(session({
+app.use(express.static(dir)) // init du middleware pour servir des fichiers
+
+  .use(session({
     name: 'session',
     secret: 'Bob Morane',
     resave: false,
@@ -38,14 +44,24 @@ app.use(session({
 
     res.render('accueil.ejs', {
       views: req.session.views,
-      thingsToDo : req.session.thingsToDo
-    });
+      thingsToDo: req.session.thingsToDo
+    })
   })
 
+  // ajout d'une route GET (route par défaut)
+  .get('/delete/:id', function(req, res, next) {
+    // Suppression de la tâche i du tableau de tâches
+    req.session.thingsToDo.splice(req.params.id, 1);
+
+    res.redirect('/');
+  })
+
+/*
   // gestion des routes inconnues
   .use(function(req, res, next) {
     res.setHeader('Content-Type', 'text/plain');
     res.status(404).send('Page introuvable !');
-  });
+  })*/
+;
 
 app.listen(8080);
