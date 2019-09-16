@@ -8,7 +8,6 @@
 
 <body>
   <h1>Todo list</h1>
-  <p>Nombre de vues : <%= views %></p>
   <li>
     <%
     for (var i = 0, c = thingsToDo.length; i < c; i++) {
@@ -21,6 +20,10 @@
     <%
 }
      %></li>
+     <form class="" action="/add" method="post">
+       <input type="text" name="task" value="">
+       <input type="image" src="sign-add-icon.png" alt="Spumettre le formulaire">
+     </form>
 </body>
 
 </html>
