@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Todo list</title>
+</head>
+
+<body>
+  <h1>Todo list</h1>
+  <li>
+    <%
+    for (var i = 0, c = thingsToDo.length; i < c; i++) {
+      %>
+    <ul>
+      <%= thingsToDo[i]; %>
+      <a href="delete/<%=i%>"><img src="delete-1-icon.png" alt="" width="10" height="10"></a>
+    </ul>
+
+    <%
+}
+     %></li>
+     <form class="" action="/add" method="post">
+       <input type="text" name="task" value="">
+       <input type="image" src="sign-add-icon.png" alt="Spumettre le formulaire">
+     </form>
+</body>
+
+</html>
