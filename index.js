@@ -32,12 +32,6 @@ var expiryDate = new Date(Date.now() + 60 * 60 * 1000);
 
 // variable de session du serveur express
 var sessionMiddleware = session({
-  /*
-    store: new RedisStore({}),
-    secret: 'Bob Morane',
-    resave: false,
-    saveUninitialized: true
-    */
   name: 'session',
   secret: 'Bob Morane',
   resave: false,
@@ -64,6 +58,7 @@ app.use(express.static(dir))
 
   // ajout d'une route GET (route par défaut)
   .get('/', function(req, res, next) {
+    console.log('GET /');
     res.render('accueil.ejs', {
       thingsToDo: req.session.thingsToDo
     })
@@ -71,6 +66,7 @@ app.use(express.static(dir))
 
   // ajout d'une route de suppression
   .get('/delete/:id', function(req, res, next) {
+    console.log('GET delete');
     // Suppression de la tâche i du tableau de tâches
     req.session.thingsToDo.splice(req.params.id, 1);
     // redirection vers l'accueil
@@ -79,6 +75,7 @@ app.use(express.static(dir))
 
   // Ajout de la route POST /add pur ajouter une tâche
   .post('/add', urlencodedParser, function(req, res) {
+    console.log('GET add');
     let thingsToDo = req.session.thingsToDo;
     let task = req.body.task;
     // si la variable de session existe
