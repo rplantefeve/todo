@@ -8,9 +8,9 @@ var socket = io('http://localhost:8080');
 // on écoute l'arrivée de message du serveur
 socket.on('task_to_add', function(task) {
   // manipulation du DOM avec jQuery
-  $('#tasks').append('<li>' + task.task + '<a id="del_' + task.num + '" href="delete/' +
-    task.num +
-    '"><img src="delete-1-icon.png" alt="" width="10" height="10"></a></li>');
+  $('#tasks').append('<li>' + task.task + '<a class="delete" href="delete/' +
+    task.num + ' data-index="'+ task.num
+    +'""><img src="delete-1-icon.png" alt="" width="10" height="10"></a></li>');
 });
 // on écoute l'arrivée de message du serveur
 socket.on('task_to_delete', function(id) {
@@ -31,13 +31,12 @@ $('form').submit(function(e) {
   //return false;
 });
 
-// Suppression
-$('#tasks').on('click','li a', function() {
-  // récup de l'id dans l'url du lien
-  var ids = this.href.split('/');
-  var id = ids[ids.length - 1];
-  //alert(id);
+/*
+ Suppression (évènement delegate sur la balise parente. Ainsi, les balises
+  enfants auront tous le même listener)
+ */
+$('#tasks').on('click','li .delete', function() {
   // envoi de la tâche à supprimer au serveur
-  socket.emit('task_deleted', id);
+  socket.emit('task_deleted', $(this).data('index'));
 
 });
