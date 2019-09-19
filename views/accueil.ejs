@@ -4,23 +4,31 @@
 <head>
   <meta charset="utf-8">
   <title>Todo list</title>
+  <style>
+    form {
+      display: inline;
+    }
+
+    input {
+      vertical-align: middle;
+    }
+  </style>
 </head>
 
 <body>
   <h1>Todo list</h1>
   <ul id="tasks">
-    <%
-    for (var i = 0, c = thingsToDo.length; i < c; i++) {
-      %>
+    <% for (var i = 0, c = thingsToDo.length; i < c; i++) { %>
     <li>
-      <%= thingsToDo[i]; %>
-      <a class="delete" href="delete/<%=i%>" data-index="<%=i%>"><img src="delete-1-icon.png" alt="" width="10" height="10"></a>
+      <%= thingsToDo[i] %>
+      <form class="deleteForm" action="#" method="get">
+        <input type="image" src="delete-1-icon.png" class="delete" alt="delete task" width="10" height="10">
+      </form>
     </li>
-    <%
-}
-     %></ul>
-  <form class="" action="/add" method="post">
-    <input type="text" name="task" value="" id="task">
+    <% } %>
+  </ul>
+  <form id="formAdd" class="" action="/add" method="post">
+    <input type="text" name="task" value="" id="task" autocomplete="off">
     <input type="image" src="sign-add-icon.png" alt="Soumettre le formulaire">
   </form>
   <!-- using JQuery -->
