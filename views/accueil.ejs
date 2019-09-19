@@ -9,18 +9,15 @@
 <body>
   <h1>Todo list</h1>
   <ul id="tasks">
-    <%
-    for (var i = 0, c = thingsToDo.length; i < c; i++) {
-      %>
+    <% for (var i = 0, c = thingsToDo.length; i < c; i++) { %>
     <li>
-      <%= thingsToDo[i]; %>
+      <%= thingsToDo[i] %>
       <a class="delete" href="delete/<%=i%>" data-index="<%=i%>"><img src="delete-1-icon.png" alt="" width="10" height="10"></a>
     </li>
-    <%
-}
-     %></ul>
+    <% } %>
+  </ul>
   <form class="" action="/add" method="post">
-    <input type="text" name="task" value="" id="task">
+    <input type="text" name="task" value="" id="task" autocomplete="off">
     <input type="image" src="sign-add-icon.png" alt="Soumettre le formulaire">
   </form>
   <!-- using JQuery -->
