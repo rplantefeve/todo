@@ -8,7 +8,7 @@ var socket = io('http://localhost:8080');
 // on écoute l'arrivée de message du serveur
 socket.on('task_to_add', function(task) {
   // manipulation du DOM avec jQuery
-  $('#tasks').append('<li>' + task.task + '<a id="del_' + task.num + '" href="delete/' +
+  $('#tasks').append('<li>' + task.task + '<a class="delete" href="delete/' +
     task.num +
     '"><img src="delete-1-icon.png" alt="" width="10" height="10"></a></li>');
 });
@@ -32,7 +32,7 @@ $('form').submit(function(e) {
 });
 
 // Suppression
-$('#tasks').on('click','li a', function() {
+$('#tasks').on('click','li .delete', function() {
   // récup de l'id dans l'url du lien
   var ids = this.href.split('/');
   var id = ids[ids.length - 1];
