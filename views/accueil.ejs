@@ -8,22 +8,26 @@
 
 <body>
   <h1>Todo list</h1>
-  <li>
+  <ul id="tasks">
     <%
     for (var i = 0, c = thingsToDo.length; i < c; i++) {
       %>
-    <ul>
+    <li>
       <%= thingsToDo[i]; %>
-      <a href="delete/<%=i%>"><img src="delete-1-icon.png" alt="" width="10" height="10"></a>
-    </ul>
-
+      <a id="del_<%=i%>" href="delete/<%=i%>"><img src="delete-1-icon.png" alt="" width="10" height="10"></a>
+    </li>
     <%
 }
-     %></li>
-     <form class="" action="/add" method="post">
-       <input type="text" name="task" value="">
-       <input type="image" src="sign-add-icon.png" alt="Spumettre le formulaire">
-     </form>
+     %></ul>
+  <form class="" action="/add" method="post">
+    <input type="text" name="task" value="" id="task">
+    <input type="image" src="sign-add-icon.png" alt="Soumettre le formulaire">
+  </form>
+  <!-- using JQuery -->
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <!-- Le client récupère socket.io.js -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="main.js"></script>
 </body>
 
 </html>

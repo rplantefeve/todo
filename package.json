@@ -1,10 +1,11 @@
 {
     "name": "todo",
-    "version": "0.0.1",
+    "version": "0.2.0",
     "dependencies": {
         "body-parser": "^1.19.0",
         "ejs": "^2.7.1",
         "express": "^4.17.1",
-        "express-session": "^1.16.2"
+        "express-session": "^1.16.2",
+        "socket.io": "^2.2.0"
     }
 }
